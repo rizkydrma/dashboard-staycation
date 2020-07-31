@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const bankSchema = new schema({
-  nameBank: {
+  bankName: {
     type: String,
     required: true,
   },
@@ -10,7 +10,11 @@ const bankSchema = new schema({
     type: String,
     required: true,
   },
-  name: {
+  ownerName: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
     type: String,
     required: true,
   },

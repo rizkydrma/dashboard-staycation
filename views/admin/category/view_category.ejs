@@ -15,6 +15,7 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
+        <%- include('../../partials/alert.ejs') %>
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">Dashboard Category</h1>
         <!-- End Heading -->
@@ -78,13 +79,15 @@
 %> <%- include('../../partials/js.ejs') %>
 
 <script>
-  const btnEdit = document.querySelectorAll(".btn-edit");
-  const inputName = document.querySelector(".input-name");
-  const inputId = document.querySelector(".input-id");
-  btnEdit.forEach((button) => {
-    button.addEventListener("click", () => {
-      inputId.value = button.dataset.id;
-      inputName.value = button.dataset.name;
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnEdit = document.querySelectorAll(".btn-edit");
+    const inputName = document.querySelector(".input-name");
+    const inputId = document.querySelector(".input-id");
+    btnEdit.forEach((button) => {
+      button.addEventListener("click", () => {
+        inputId.value = button.dataset.id;
+        inputName.value = button.dataset.name;
+      });
     });
   });
 </script>

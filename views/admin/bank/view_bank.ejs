@@ -15,6 +15,7 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
+        <%- include('../../partials/alert.ejs') %>
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">Dashboard Bank</h1>
         <!-- End Heading -->
@@ -74,4 +75,23 @@
   </div>
 </div>
 
-<%- include('../../partials/js.ejs') %>
+<%- include('add_modal_bank.ejs') %> <%- include('edit_modal_bank.ejs') %> <%-
+include('../../partials/js.ejs') %>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnEdit = document.querySelectorAll(".btn-edit");
+    const inputId = document.querySelector(".input-id");
+    const inputBankName = document.querySelector(".input-bank-name");
+    const inputNomorRekening = document.querySelector(".input-nomor-rekening");
+    const inputOwnerName = document.querySelector(".input-owner-name");
+
+    btnEdit.forEach((button) => {
+      button.addEventListener("click", () => {
+        inputId.value = button.dataset.id;
+        inputBankName.value = button.dataset.bankname;
+        inputNomorRekening.value = button.dataset.nomorrekening;
+        inputOwnerName.value = button.dataset.ownername;
+      });
+    });
+  });
+</script>
