@@ -74,4 +74,17 @@
   </div>
 </div>
 
-<%- include('../../partials/js.ejs') %>
+<%- include('add_modal_category.ejs') %> <%- include('edit_modal_category.ejs')
+%> <%- include('../../partials/js.ejs') %>
+
+<script>
+  const btnEdit = document.querySelectorAll(".btn-edit");
+  const inputName = document.querySelector(".input-name");
+  const inputId = document.querySelector(".input-id");
+  btnEdit.forEach((button) => {
+    button.addEventListener("click", () => {
+      inputId.value = button.dataset.id;
+      inputName.value = button.dataset.name;
+    });
+  });
+</script>

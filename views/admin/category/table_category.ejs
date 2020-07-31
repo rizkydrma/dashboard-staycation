@@ -1,7 +1,16 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">
-      Data Category
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#categoryModal"
+      >
+        <i class="fas fa-plus"></i>
+        Add Data
+      </button>
     </h6>
   </div>
   <div class="card-body">
@@ -19,6 +28,34 @@
             <th>Action</th>
           </tr>
         </thead>
+        <tbody>
+          <% categories.forEach((category, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= category.name %></td>
+            <td>
+              <form
+                action="/admin/category/<%= category.id  %>?_method=DELETE"
+                method="POST"
+              >
+                <button
+                  type="button"
+                  class="btn btn-sm btn-warning btn-edit"
+                  data-toggle="modal"
+                  data-target="#editCategoryModal"
+                  data-name="<%- category.name %>"
+                  data-id="<%- category._id %>"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button type="submit" class="btn btn-sm btn-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
       </table>
     </div>
   </div>
