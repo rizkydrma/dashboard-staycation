@@ -17,7 +17,7 @@
   <hr class="sidebar-divider my-0" />
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item">
+  <li class="nav-item <%= (sidebar === 'dashboard')? 'active' : '' %>">
     <a class="nav-link" href="/admin/dashboard">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a
@@ -33,7 +33,7 @@
   </div>
 
   <!-- Nav Item - Category -->
-  <li class="nav-item">
+  <li class="nav-item <%= (sidebar === 'category')? 'active' : '' %>">
     <a class="nav-link" href="/admin/category">
       <i class="fas fa-fw fa-list-alt"></i>
       <span>Category</span></a
@@ -41,7 +41,7 @@
   </li>
 
   <!-- Nav Item - Bank -->
-  <li class="nav-item">
+  <li class="nav-item <%= (sidebar === 'bank')? 'active' : '' %>">
     <a class="nav-link" href="/admin/bank">
       <i class="fas fa-fw fa-money-check"></i>
       <span>Bank</span></a
@@ -49,7 +49,7 @@
   </li>
 
   <!-- Nav Item - Item -->
-  <li class="nav-item">
+  <li class="nav-item <%= (sidebar === 'item')? 'active' : '' %>">
     <a class="nav-link" href="/admin/item">
       <i class="fas fa-fw fa-hotel"></i>
       <span>Item</span></a
@@ -65,7 +65,7 @@
   </div>
 
   <!-- Nav Item - Booking -->
-  <li class="nav-item">
+  <li class="nav-item <%= (sidebar === 'booking')? 'active' : '' %>">
     <a class="nav-link" href="/admin/booking">
       <i class="fas fa-fw fa-shopping-cart"></i>
       <span>Booking</span></a

@@ -1,0 +1,23 @@
+<div
+  class="tab-pane fade show active"
+  id="show-image"
+  role="tabpanel"
+  aria-labelledby="home-tab"
+>
+  <div class="row">
+    <% item.imageId.forEach((image, index) => { %>
+    <div class="col-md-4">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <img
+            src="http://localhost:5000/<%= image.imageUrl %>"
+            alt="image-<%= index +1 %>"
+            width="100%"
+          />
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+  <a href="/admin/item" class="btn btn-primary">Back</a>
+</div>

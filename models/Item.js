@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { objectId } = mongoose.Schema;
 const schema = mongoose.Schema;
+const { ObjectId } = schema;
 
 const itemSchema = new schema({
   title: {
@@ -21,27 +21,31 @@ const itemSchema = new schema({
   },
   isPopular: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   description: {
     type: String,
     required: true,
   },
+  categoryId: {
+    type: ObjectId,
+    ref: "Category",
+  },
   imageId: [
     {
-      type: objectId,
+      type: ObjectId,
       ref: "Image",
     },
   ],
   featureId: [
     {
-      type: objectId,
+      type: ObjectId,
       ref: "Feature",
     },
   ],
   activityId: [
     {
-      type: objectId,
+      type: ObjectId,
       ref: "Activity",
     },
   ],

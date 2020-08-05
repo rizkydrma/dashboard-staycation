@@ -3,26 +3,18 @@ const path = require("path");
 const fs = require("fs");
 // import uuid from "uuid/v4";
 
-// const storageMultiple = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     var dir = "public/images";
-//     if (!fs.existsSync(dir)) {
-//       fs.mkdirSync(dir);
-//     }
-//     cb(null, dir);
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
-
-// const uploadMultiple = multer({
-//   storage: storageMultiple,
-//   limits: { fileSize: 1000000 },
-//   fileFilter: function (req, file, cb) {
-//     checkFileType(file, cb);
-//   },
-// }).array("image", 12);
+const storageMultiple = multer.diskStorage({
+  destination: function (req, file, cb) {
+    var dir = "public/images";
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    cb(null, dir);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 
 // Set storage engine
 const storage = multer.diskStorage({
@@ -38,7 +30,15 @@ const upload = multer({
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
-}).single("imageBank");
+}).single("image");
+
+const uploadMultiple = multer({
+  storage: storage,
+  // limits: { fileSize: 1000000 },
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).array("image", 12);
 
 // // Check file Type
 function checkFileType(file, cb) {
@@ -56,4 +56,4 @@ function checkFileType(file, cb) {
   }
 }
 
-module.exports = { upload };
+module.exports = { upload, uploadMultiple };

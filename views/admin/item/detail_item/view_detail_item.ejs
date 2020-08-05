@@ -1,8 +1,8 @@
-<%- include('../../partials/header.ejs') %>
+<%- include('../../../partials/header.ejs') %>
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- Sidebar -->
-  <%- include('../../partials/sidebar.ejs') %>
+  <%- include('../../../partials/sidebar.ejs') %>
   <!-- End of Sidebar -->
 
   <!-- Content Wrapper -->
@@ -10,7 +10,7 @@
     <!-- Main Content -->
     <div id="content">
       <!-- Topbar -->
-      <%- include('../../partials/navbar.ejs') %>
+      <%- include('../../../partials/navbar.ejs') %>
       <!-- End of Topbar -->
 
       <!-- Begin Page Content -->
@@ -19,7 +19,7 @@
         <h1 class="h3 mb-4 text-gray-800">Dashboard Item</h1>
         <!-- End Heading -->
 
-        <%- include('../../partials/alert.ejs') %> <% if(action === 'view') { %>
+        <%- include('../../../partials/alert.ejs') %>
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
@@ -27,11 +27,11 @@
               class="nav-link active"
               id="home-tab"
               data-toggle="tab"
-              href="#show-item"
+              href="#show-feature"
               role="tab"
               aria-controls="home"
               aria-selected="true"
-              >Show Item</a
+              >Show Feature</a
             >
           </li>
           <li class="nav-item">
@@ -39,61 +39,24 @@
               class="nav-link"
               id="profile-tab"
               data-toggle="tab"
-              href="#add-item"
+              href="#show-activity"
               role="tab"
               aria-controls="profile"
               aria-selected="false"
-              >Add Item</a
+              >Show Activity</a
             >
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <%- include('table_item.ejs') %> <%- include('add_item.ejs') %>
+          <%- include('show_feature.ejs') %> <%- include('show_activity.ejs') %>
         </div>
-        <% }else if(action === 'show image') { %>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#show-image"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-              >Show Image</a
-            >
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <%- include('image_item.ejs') %>
-        </div>
-        <% }else if(action === 'edit item'){ %>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#edit-item"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-              >Edit Item</a
-            >
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <%- include('edit_item.ejs') %>
-        </div>
-        <% } %>
       </div>
       <!-- /.container-fluid -->
     </div>
     <!-- End of Main Content -->
 
     <!-- Footer -->
-    <%- include('../../partials/footer.ejs') %>
+    <%- include('../../../partials/footer.ejs') %>
     <!-- End of Footer -->
   </div>
   <!-- End of Content Wrapper -->
@@ -139,8 +102,28 @@
     </div>
   </div>
 </div>
-
-<%- include('../../partials/js.ejs') %>
+<%- include('show_modal_feature.ejs') %> <%- include('show_modal_activity.ejs')
+%> <%- include('../../../partials/js.ejs') %>
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    $("#dataTableActivity").DataTable();
+    const btnEditFeature = document.querySelectorAll(".btn-edit-feature");
+    btnEditFeature.forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelector(".input-id").value = button.dataset.id;
+        document.querySelector(".input-name").value = button.dataset.name;
+        document.querySelector(".input-qty").value = button.dataset.qty;
+      });
+    });
+    const btnEditActivity = document.querySelectorAll(".btn-edit-activity");
+    btnEditActivity.forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelector(".input-id-activity").value = button.dataset.id;
+        document.querySelector(".input-type").value = button.dataset.type;
+        document.querySelector(".input-name-activity").value =
+          button.dataset.name;
+      });
+    });
+  });
   CKEDITOR.replace("about");
 </script>

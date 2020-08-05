@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div
   class="modal fade"
-  id="editBankModal"
+  id="editFeatureModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalLabel"
@@ -10,7 +10,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editBankModalLabel">Edit Bank</h5>
+        <h5 class="modal-title" id="editBankModalLabel">Edit Feature</h5>
         <button
           type="button"
           class="close"
@@ -21,49 +21,37 @@
         </button>
       </div>
       <form
-        action="/admin/bank?_method=PUT"
+        action="/admin/item/update/feature?_method=PUT"
         method="POST"
         enctype="multipart/form-data"
       >
         <div class="modal-body">
-          <input type="text" name="id" class="input-id" />
+          <input type="hidden" value="<%= itemId %>" name="itemId" />
+          <input type="hidden" name="id" class="input-id" />
           <div class="form-group">
-            <label for="bankName">Bank Name</label>
+            <label for="name">Name</label>
             <input
               type="text"
-              class="form-control input-bank-name"
-              name="bankName"
+              class="form-control input-name"
+              name="name"
               placeholder="enter bank name..."
               required
             />
           </div>
           <div class="form-group">
-            <label for="nomorRekening">Nomor Rekening</label>
+            <label for="qty">QTY</label>
             <input
               type="text"
-              class="form-control input-nomor-rekening"
-              name="nomorRekening"
+              class="form-control input-qty"
+              name="qty"
               placeholder="enter nomor rekening..."
               required
             />
           </div>
+
           <div class="form-group">
-            <label for="ownerName">Owner Name</label>
-            <input
-              type="text"
-              class="form-control input-owner-name"
-              name="ownerName"
-              placeholder="enter owner name..."
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="image">Image Bank</label>
-            <input
-              type="file"
-              class="form-control input-image-bank"
-              name="image"
-            />
+            <label for="image">Image</label>
+            <input type="file" class="form-control input-image" name="image" />
             <span>Pilih image untuk update image</span>
           </div>
         </div>

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
+const { ObjectId } = schema;
 
 const featureSchema = new schema({
   name: {
@@ -13,6 +14,10 @@ const featureSchema = new schema({
   imageUrl: {
     type: String,
     required: true,
+  },
+  itemId: {
+    type: ObjectId,
+    ref: "Item",
   },
 });
 
