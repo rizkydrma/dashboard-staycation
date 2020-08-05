@@ -1,11 +1,20 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../middleware/auth");
 
 // CONTROLLER
 const adminController = require("../controller/adminController");
 
 // middleware
 const { upload, uploadMultiple } = require("../middleware/multer");
+
+// SET ROUTE SIGN IN
+router.get("/signin", adminController.viewSignIn);
+router.post("/signin", adminController.actionSignIn);
+
+// USER MUST LOGIN FIRST FOR INTO DASHBOARD
+router.use(auth);
+router.get("/logout", adminController.actionLogout);
 
 // SET ROUTE GET - ENDPOINT
 router.get("/dashboard", adminController.viewDashboard);

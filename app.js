@@ -11,7 +11,7 @@ const flash = require("connect-flash");
  * build a connection with mongodb
  */
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/db_staycation", {
+mongoose.connect("mongodb://127.0.0.1:27017/db_staycation", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -36,7 +36,7 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 60000 },
+    cookie: { secure: false, maxAge: 1000 * 60 * 30 },
   })
 );
 app.use(flash());

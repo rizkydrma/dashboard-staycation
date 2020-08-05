@@ -11,6 +11,10 @@ const itemSchema = new schema({
     type: Number,
     required: true,
   },
+  sumBooking: {
+    type: Number,
+    default: 0,
+  },
   country: {
     type: String,
     default: "Indonesia",
@@ -26,6 +30,10 @@ const itemSchema = new schema({
   description: {
     type: String,
     required: true,
+  },
+  unit: {
+    type: String,
+    default: "night",
   },
   categoryId: {
     type: ObjectId,
