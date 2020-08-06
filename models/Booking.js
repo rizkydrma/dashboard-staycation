@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
+const Member = require("./Member");
 const { ObjectId } = schema;
 
 const bookingSchema = new schema({
@@ -39,9 +40,8 @@ const bookingSchema = new schema({
   },
   memberId: {
     type: ObjectId,
-    ref: "Member",
+    ref: Member,
   },
-
   bankId: {
     type: ObjectId,
     ref: "Bank",

@@ -20,7 +20,6 @@ seeder.connect(
       "./models/Activity",
       "./models/Member",
       "./models/Image",
-      "./models/Member",
       "./models/Booking",
       "./models/Users",
     ]);

@@ -5,9 +5,11 @@ const Image = require("../models/Image");
 const Feature = require("../models/Feature");
 const Activity = require("../models/Activity");
 const Users = require("../models/Users");
+const Booking = require("../models/Booking");
 const fs = require("fs-extra");
 const path = require("path");
 const bcrypt = require("bcryptjs");
+const Member = require("../models/Member");
 
 module.exports = {
   viewSignIn: (req, res) => {
@@ -63,13 +65,22 @@ module.exports = {
     req.flash("alertStatus", "success");
     res.redirect("/admin/signin");
   },
-  viewDashboard: (req, res) => {
-    console.log(req.session);
-    res.render("admin/dashboard/view_dashboard", {
-      title: "Staycation | Dashboard",
-      sidebar: "dashboard",
-      user: req.session.user,
-    });
+  viewDashboard: async (req, res) => {
+    try {
+      const member = await Member.find();
+      const booking = await Booking.find();
+      const item = await Item.find();
+      res.render("admin/dashboard/view_dashboard", {
+        title: "Staycation | Dashboard",
+        sidebar: "dashboard",
+        user: req.session.user,
+        member,
+        booking,
+        item,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   },
   viewBank: async (req, res) => {
     try {
@@ -149,6 +160,7 @@ module.exports = {
       const items = await Item.find()
         .populate({ path: "imageId", select: "id imageUrl" })
         .populate({ path: "categoryId", select: "id name" });
+      console.log(items);
       const categories = await Category.find();
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
@@ -458,12 +470,64 @@ module.exports = {
       res.redirect(`/admin/item/show-detail-item/${itemId}`);
     }
   },
-  viewBooking: (req, res) => {
-    res.render("admin/booking/view_booking", {
-      title: "Staycation | Booking",
-      sidebar: "booking",
-      user: req.session.user,
-    });
+  viewBooking: async (req, res) => {
+    try {
+      const bookings = await Booking.find()
+        .populate("bankId")
+        .populate("memberId");
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus };
+      res.render("admin/booking/view_booking", {
+        title: "Staycation | Booking",
+        sidebar: "booking",
+        user: req.session.user,
+        bookings,
+        alert,
+      });
+    } catch (error) {
+      res.redirect("/admin/dashboard");
+    }
+  },
+  showDetailBooking: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const booking = await Booking.findOne({ _id: id })
+        .populate("bankId")
+        .populate("memberId");
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus };
+      res.render("admin/booking/show_detail_booking", {
+        title: "Staycation | Booking",
+        sidebar: "booking",
+        user: req.session.user,
+        booking,
+        alert,
+      });
+    } catch (error) {
+      res.redirect("/admin/booking");
+    }
+  },
+  actionConfirmation: async (req, res) => {
+    const { id, confirmation } = req.params;
+    try {
+      const booking = await Booking.findOne({ _id: id });
+      if (confirmation === "accept") {
+        booking.payments.status = "Accept";
+        req.flash("alertMessage", "Confirmation Booking Accepted");
+        req.flash("alertStatus", "success");
+      } else if (confirmation === "reject") {
+        booking.payments.status = "Reject";
+        req.flash("alertMessage", "Confirmation Booking Rejected");
+        req.flash("alertStatus", "danger");
+      }
+      await booking.save();
+      res.redirect("/admin/booking/" + id);
+    } catch (error) {
+      console.error(error);
+      res.redirect("/admin/booking/" + id);
+    }
   },
   viewCategory: async (req, res) => {
     const categories = await Category.find();

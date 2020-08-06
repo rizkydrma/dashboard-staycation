@@ -1,0 +1,72 @@
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <a href="/admin/booking" class="btn btn-warning">Back</a>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="table-responsive">
+          <table
+            class="table table-bordered"
+            id="dataTableActivity"
+            width="100%"
+            cellspacing="0"
+          >
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Nama Member</th>
+                <th>Total</th>
+                <th>Nama Bank</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= booking.itemId.title %></td>
+                <td>
+                  <%= booking.memberId.firstName +' ' +
+                  booking.memberId.firstName %>
+                </td>
+                <td>$ <%= booking.total %></td>
+                <td><%= booking.payments.bankFrom %></td>
+                <td><%= booking.payments.status %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <img
+          src="http://localhost:5000/<%= booking.payments.proofPayment%>"
+          alt=""
+          style="width: 100%;"
+        />
+        <% if(booking.payments.status === 'Proses'){ %>
+        <div class="row justify-content-center m-3">
+          <div class="col">
+            <form
+              action="/admin/booking/<%= booking._id %>/accept?_method=PUT"
+              method="POST"
+            >
+              <button type="submit" class="btn btn-success btn-block">
+                <i class="fas fa-check"></i>Confirmation
+              </button>
+            </form>
+          </div>
+          <div class="col">
+            <form
+              action="/admin/booking/<%= booking._id %>/reject?_method=PUT"
+              method="POST"
+            >
+              <button type="submit" class="btn btn-danger btn-block">
+                <i class="fas fa-times"></i>Reject
+              </button>
+            </form>
+          </div>
+        </div>
+        <%} %>
+      </div>
+    </div>
+  </div>
+</div>

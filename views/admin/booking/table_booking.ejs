@@ -23,6 +23,33 @@
             <th>Action</th>
           </tr>
         </thead>
+        <tbody>
+          <% bookings.forEach((booking, index) => { %>
+          <tr>
+            <td>
+              <%= index + 1 %>
+            </td>
+            <td>
+              <%= booking.bookingStartDate.toLocaleString().split(',')[0] %> s/d
+              <%= booking.bookingEndDate.toLocaleString().split(',')[0] %>
+            </td>
+            <td><%= booking.itemId.title %></td>
+            <td>
+              <%= booking.memberId.firstName + ' ' + booking.memberId.lastName
+              %>
+            </td>
+            <td><%= booking.bankId.bankName %></td>
+            <td><%= booking.payments.status %></td>
+            <td>
+              <a
+                href="/admin/booking/<%= booking._id %> "
+                class="btn btn-circle btn-sm btn-info"
+                ><i class="fas fa-eye"></i
+              ></a>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
       </table>
     </div>
   </div>

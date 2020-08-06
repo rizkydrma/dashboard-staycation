@@ -18,7 +18,6 @@ router.get("/logout", adminController.actionLogout);
 
 // SET ROUTE GET - ENDPOINT
 router.get("/dashboard", adminController.viewDashboard);
-router.get("/booking", adminController.viewBooking);
 
 // SET ROUTE ITEM
 router.get("/item", adminController.viewItem);
@@ -50,4 +49,9 @@ router.get("/bank", adminController.viewBank);
 router.post("/bank", upload, adminController.addBank);
 router.put("/bank", upload, adminController.editBank);
 router.delete("/bank/:id", adminController.deleteBank);
+
+// SET ROUTE BOOKING
+router.get("/booking", adminController.viewBooking);
+router.get("/booking/:id", adminController.showDetailBooking);
+router.put("/booking/:id/:confirmation", adminController.actionConfirmation);
 module.exports = router;
