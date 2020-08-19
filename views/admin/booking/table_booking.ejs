@@ -15,10 +15,10 @@
         <thead>
           <tr>
             <th>No</th>
+            <th>Invoice</th>
             <th>Date</th>
             <th>Title</th>
             <th>Member Name</th>
-            <th>Bank Name</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -30,6 +30,9 @@
               <%= index + 1 %>
             </td>
             <td>
+              <%= booking.invoice %>
+            </td>
+            <td>
               <%= booking.bookingStartDate.toLocaleString().split(',')[0] %> s/d
               <%= booking.bookingEndDate.toLocaleString().split(',')[0] %>
             </td>
@@ -38,7 +41,6 @@
               <%= booking.memberId.firstName + ' ' + booking.memberId.lastName
               %>
             </td>
-            <td><%= booking.bankId.bankName %></td>
             <td><%= booking.payments.status %></td>
             <td>
               <a
